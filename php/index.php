@@ -1,18 +1,28 @@
 <?php
-use Psr\Http\Message\ResponseInterface as Response;
-use Psr\Http\Message\ServerRequestInterface as Request;
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
+require_once './siteController/RilevatoreController.php';
+require_once './siteController/SiteController.php';
+require_once './classi_php/Impianto.php';
 
 $app = AppFactory::create();
 
-$app->get('/', function (Request $request, Response $response, $args) {
-  $mysqli_connection = new MySQLi('my_db', 'root', 'ciccio', 'db');
-  $result = $mysqli_connection->query("SELECT * FROM alunni");
-  $results = $result->fetch_all(MYSQLI_ASSOC);
-  $response->getBody()->write(json_encode($results));
-  return $response->withHeader("Content-type", "application/json")->withStatus(201);
-});
+
+$app->get('/', 'SiteController:index');
+
+$app->get('/impianto', 'RilevatoreController:impianto');
+//{tipo} = % => umidità, {tipo} = C => temperatura
+$app->get('/rilevatori/{tipo}', 'RilevatoreController:getRilevatori');
+
+$app->get('/rilevatori/{tipo}/{identificativo}', 'RilevatoreController:getDispositivo');
+
+$app->get('/rilevatori/{tipo}/{identificativo}/misurazioni', 'RilevatoreController:getMisurazioniDispositivo');
+
+$app->get('/rilevatori/{tipo}/{identificativo}/misurazioni/maggiore_di/{valore_minimo}', 'RilevatoreController:getMisurazioniDispositivo_MaggDi_valMin');
+
+$app->post('/rilevatori/{tipo}', 'RilevatoreController:createRilevatore');
+
+$app->put('/rilevatori/{tipo}/{identificativo}', 'RilevatoreController:updateRilevatore');
 
 $app->run();
