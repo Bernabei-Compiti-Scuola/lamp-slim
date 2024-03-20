@@ -6,7 +6,7 @@
         protected $unitaDiMisura;
         protected $codiceSeriale;
 
-        public function __construct($identificativo,$codiceSeriale,$unita)
+        public function __construct($identificativo,$codiceSeriale,$unita,$tipologia)
         {
             $this->identificativo = $identificativo;
             $this->misurazioni = array();
@@ -57,6 +57,11 @@
         public function getCodiceSeriale()
         {
             return $this->codiceSeriale;
+        }
+
+        public function getTipologia()
+        {
+            return $this->tipologia;
         }
 
         public function setIdentificativo($identificativo)

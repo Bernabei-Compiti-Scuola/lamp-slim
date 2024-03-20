@@ -16,7 +16,7 @@ class Impianto implements JsonSerializable
         $this->longitudine = 0;
         $this->rilevatori = array();
 
-        $r = new RilevatoreDiTemperatura("rilevatore-1",'codice-1');
+        $r = new RilevatoreDiTemperatura("rilevatore-1",'codice-1',"Temperatura");
         $r->setTipologia("Terra");
         $r->setMisurazioni(array(['data'=>'2021-01-01','valore'=>20],['data'=>'2021-01-02','valore'=>25]));
         $this->rilevatori[]= $r;
@@ -26,7 +26,7 @@ class Impianto implements JsonSerializable
         $r->setMisurazioni(array(['data'=>'2021-01-01','valore'=>20],['data'=>'2021-01-02','valore'=>25]));
         $this->rilevatori[]= $r;
 
-        $r = new RilevatoreDiTemperatura("rilevatore-3",'codice-3');
+        $r = new RilevatoreDiTemperatura("rilevatore-3",'codice-3',"Temperatura");
         $r->setTipologia("Aria");
         $r->setMisurazioni(array(['data'=>'2021-01-01','valore'=>20],['data'=>'2021-01-02','valore'=>25]));
         $this->rilevatori[]= $r;
