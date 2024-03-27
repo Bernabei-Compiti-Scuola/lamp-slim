@@ -2,27 +2,17 @@
 use Slim\Factory\AppFactory;
 
 require __DIR__ . '/vendor/autoload.php';
-require_once './siteController/RilevatoreController.php';
+require_once './siteController/AlunniController.php';
 require_once './siteController/SiteController.php';
-require_once './classi_php/Impianto.php';
 
 $app = AppFactory::create();
 
 
 $app->get('/', 'SiteController:index');
-
-$app->get('/impianto', 'RilevatoreController:impianto');
-//{tipo} = % => umidità, {tipo} = C => temperatura
-$app->get('/rilevatori/{tipo}', 'RilevatoreController:getRilevatori');
-
-$app->get('/rilevatori/{tipo}/{identificativo}', 'RilevatoreController:getDispositivo');
-
-$app->get('/rilevatori/{tipo}/{identificativo}/misurazioni', 'RilevatoreController:getMisurazioniDispositivo');
-
-$app->get('/rilevatori/{tipo}/{identificativo}/misurazioni/maggiore_di/{valore_minimo}', 'RilevatoreController:getMisurazioniDispositivo_MaggDi_valMin');
-
-$app->post('/rilevatori/{tipo}', 'RilevatoreController:createRilevatore');
-
-$app->put('/rilevatori/{tipo}/{identificativo}', 'RilevatoreController:updateRilevatore');
+$app->get('/alunni', 'AlunniController.php:get_alunni');
+$app->get('/alunni/{id}', 'AlunniController.php:get_alunni_by_id');
+$app->post('/alunni', 'AlunniController.php:post_alunni');
+$app->put('/alunni/{id}', 'AlunniController.php:put_alunni_by_id');
+$app->delete('/alunni/{id}', 'AlunniController.php:delete_alunni_by_id');
 
 $app->run();
